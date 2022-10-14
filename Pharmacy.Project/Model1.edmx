@@ -1,0 +1,1096 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PharmacyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="BillID" />
+          </Key>
+          <Property Name="BillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DrugName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NumberOfUnits" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ExpiryDate" Type="date" />
+          <Property Name="PharmacistName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SellingDate" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Responsibility" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="salary" Type="int" />
+        </EntityType>
+        <EntityType Name="DoctorPhoneNumber">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorID" Type="int" />
+          <Property Name="PhoneNumber1" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="PhoneNumber2" Type="nvarchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="DrugManufactruer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PharmacyID" Type="int" />
+        </EntityType>
+        <EntityType Name="DrugManufactruerPhoneNumber">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DrugManufactruerID" Type="int" />
+          <Property Name="PhoneNumber1" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="PhoneNumber2" Type="nvarchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="Drugs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ISSN" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ExpiryDate" Type="date" Nullable="false" />
+          <Property Name="ProductionDate" Type="date" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="sellingPrice" Type="smallmoney" Nullable="false" />
+          <Property Name="BuyingPrice" Type="smallmoney" Nullable="false" />
+          <Property Name="Pharmcy2ID" Type="int" />
+          <Property Name="ManufactruerID" Type="int" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Region" Type="nvarchar" MaxLength="20" />
+          <Property Name="Position" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+          <Property Name="Age" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="Salary" Type="int" Nullable="false" />
+          <Property Name="ShiftTimeFrom" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ShiftTimeTo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Pharmacy_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="EmployeePhoneNumber">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="PhoneNumber1" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="PhoneNumber2" Type="nvarchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PatientPhoneNumber">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientID" Type="int" />
+          <Property Name="PhoneNumber1" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="PhoneNumber2" Type="nvarchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="Pharmacy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Region" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EmpNo" Type="int" />
+          <Property Name="ManagerID" Type="int" />
+          <Property Name="DoctorID" Type="int" />
+        </EntityType>
+        <EntityType Name="PharmacyPhoneNumber">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PharmacyID" Type="int" />
+          <Property Name="PhoneNumber1" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="PhoneNumber2" Type="nvarchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="Prescribe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorID" Type="int" Nullable="false" />
+          <Property Name="PatientID" Type="int" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrescribeDrug">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="DrugID" Type="int" />
+          <Property Name="Prescribe_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="Doc_ID">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Prescribe" Type="Self.Prescribe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Prescribe">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Doctor_ID">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pharmacy">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Doctor_IDPhone">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="DoctorPhoneNumber" Type="Self.DoctorPhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DoctorPhoneNumber">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DrugManufactruer_IDPhone">
+          <End Role="DrugManufactruer" Type="Self.DrugManufactruer" Multiplicity="0..1" />
+          <End Role="DrugManufactruerPhoneNumber" Type="Self.DrugManufactruerPhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DrugManufactruer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrugManufactruerPhoneNumber">
+              <PropertyRef Name="DrugManufactruerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Emp_IDPhone">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="EmployeePhoneNumber" Type="Self.EmployeePhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmployeePhoneNumber">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="0..1" />
+          <End Role="DrugManufactruer" Type="Self.DrugManufactruer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrugManufactruer">
+              <PropertyRef Name="PharmacyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactruerDrugs">
+          <End Role="DrugManufactruer" Type="Self.DrugManufactruer" Multiplicity="0..1" />
+          <End Role="Drugs" Type="Self.Drugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DrugManufactruer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="ManufactruerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PharmacyDrugs">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="0..1" />
+          <End Role="Drugs" Type="Self.Drugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="Pharmcy2ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_Drug">
+          <End Role="Drugs" Type="Self.Drugs" Multiplicity="0..1" />
+          <End Role="PrescribeDrug" Type="Self.PrescribeDrug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drugs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PrescribeDrug">
+              <PropertyRef Name="DrugID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Manager_ID">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pharmacy">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Patient_IDPhone">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+          <End Role="PatientPhoneNumber" Type="Self.PatientPhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PatientPhoneNumber">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Pharmacy_IDPhone">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="0..1" />
+          <End Role="PharmacyPhoneNumber" Type="Self.PharmacyPhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PharmacyPhoneNumber">
+              <PropertyRef Name="PharmacyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PharmacyID">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Pharmacy_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PHID">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Prescribe" Type="Self.Prescribe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Prescribe">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Prescribe_Drug">
+          <End Role="Prescribe" Type="Self.Prescribe" Multiplicity="0..1" />
+          <End Role="PrescribeDrug" Type="Self.PrescribeDrug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prescribe">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PrescribeDrug">
+              <PropertyRef Name="Prescribe_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PharmacyModelStoreContainer">
+          <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorPhoneNumber" EntityType="Self.DoctorPhoneNumber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DrugManufactruer" EntityType="Self.DrugManufactruer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DrugManufactruerPhoneNumber" EntityType="Self.DrugManufactruerPhoneNumber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drugs" EntityType="Self.Drugs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeePhoneNumber" EntityType="Self.EmployeePhoneNumber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientPhoneNumber" EntityType="Self.PatientPhoneNumber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pharmacy" EntityType="Self.Pharmacy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PharmacyPhoneNumber" EntityType="Self.PharmacyPhoneNumber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prescribe" EntityType="Self.Prescribe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrescribeDrug" EntityType="Self.PrescribeDrug" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Doc_ID" Association="Self.Doc_ID">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Prescribe" EntitySet="Prescribe" />
+          </AssociationSet>
+          <AssociationSet Name="Doctor_ID" Association="Self.Doctor_ID">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+          </AssociationSet>
+          <AssociationSet Name="Doctor_IDPhone" Association="Self.Doctor_IDPhone">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="DoctorPhoneNumber" EntitySet="DoctorPhoneNumber" />
+          </AssociationSet>
+          <AssociationSet Name="DrugManufactruer_IDPhone" Association="Self.DrugManufactruer_IDPhone">
+            <End Role="DrugManufactruer" EntitySet="DrugManufactruer" />
+            <End Role="DrugManufactruerPhoneNumber" EntitySet="DrugManufactruerPhoneNumber" />
+          </AssociationSet>
+          <AssociationSet Name="Emp_IDPhone" Association="Self.Emp_IDPhone">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeePhoneNumber" EntitySet="EmployeePhoneNumber" />
+          </AssociationSet>
+          <AssociationSet Name="FK" Association="Self.FK">
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+            <End Role="DrugManufactruer" EntitySet="DrugManufactruer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactruerDrugs" Association="Self.FK_ManufactruerDrugs">
+            <End Role="DrugManufactruer" EntitySet="DrugManufactruer" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PharmacyDrugs" Association="Self.FK_PharmacyDrugs">
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="ID_Drug" Association="Self.ID_Drug">
+            <End Role="Drugs" EntitySet="Drugs" />
+            <End Role="PrescribeDrug" EntitySet="PrescribeDrug" />
+          </AssociationSet>
+          <AssociationSet Name="Manager_ID" Association="Self.Manager_ID">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+          </AssociationSet>
+          <AssociationSet Name="Patient_IDPhone" Association="Self.Patient_IDPhone">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="PatientPhoneNumber" EntitySet="PatientPhoneNumber" />
+          </AssociationSet>
+          <AssociationSet Name="Pharmacy_IDPhone" Association="Self.Pharmacy_IDPhone">
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+            <End Role="PharmacyPhoneNumber" EntitySet="PharmacyPhoneNumber" />
+          </AssociationSet>
+          <AssociationSet Name="PharmacyID" Association="Self.PharmacyID">
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="PHID" Association="Self.PHID">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Prescribe" EntitySet="Prescribe" />
+          </AssociationSet>
+          <AssociationSet Name="Prescribe_Drug" Association="Self.Prescribe_Drug">
+            <End Role="Prescribe" EntitySet="Prescribe" />
+            <End Role="PrescribeDrug" EntitySet="PrescribeDrug" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PharmacyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="BillID" />
+          </Key>
+          <Property Name="BillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DrugName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfUnits" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="0" />
+          <Property Name="PharmacistName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SellingDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Responsibility" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="salary" Type="Int32" />
+          <NavigationProperty Name="Prescribes" Relationship="Self.Doc_ID" FromRole="Doctor" ToRole="Prescribe" />
+          <NavigationProperty Name="Pharmacies" Relationship="Self.Doctor_ID" FromRole="Doctor" ToRole="Pharmacy" />
+          <NavigationProperty Name="DoctorPhoneNumbers" Relationship="Self.Doctor_IDPhone" FromRole="Doctor" ToRole="DoctorPhoneNumber" />
+          <NavigationProperty Name="Pharmacies1" Relationship="Self.Manager_ID" FromRole="Doctor" ToRole="Pharmacy" />
+        </EntityType>
+        <EntityType Name="DoctorPhoneNumber">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorID" Type="Int32" />
+          <Property Name="PhoneNumber1" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber2" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Doctor" Relationship="Self.Doctor_IDPhone" FromRole="DoctorPhoneNumber" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="DrugManufactruer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PharmacyID" Type="Int32" />
+          <NavigationProperty Name="DrugManufactruerPhoneNumbers" Relationship="Self.DrugManufactruer_IDPhone" FromRole="DrugManufactruer" ToRole="DrugManufactruerPhoneNumber" />
+          <NavigationProperty Name="Pharmacy" Relationship="Self.FK" FromRole="DrugManufactruer" ToRole="Pharmacy" />
+          <NavigationProperty Name="Drugs" Relationship="Self.FK_ManufactruerDrugs" FromRole="DrugManufactruer" ToRole="Drugs" />
+        </EntityType>
+        <EntityType Name="DrugManufactruerPhoneNumber">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DrugManufactruerID" Type="Int32" />
+          <Property Name="PhoneNumber1" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber2" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DrugManufactruer" Relationship="Self.DrugManufactruer_IDPhone" FromRole="DrugManufactruerPhoneNumber" ToRole="DrugManufactruer" />
+        </EntityType>
+        <EntityType Name="Drug">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ISSN" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ProductionDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="sellingPrice" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="BuyingPrice" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="Pharmcy2ID" Type="Int32" />
+          <Property Name="ManufactruerID" Type="Int32" />
+          <NavigationProperty Name="DrugManufactruer" Relationship="Self.FK_ManufactruerDrugs" FromRole="Drugs" ToRole="DrugManufactruer" />
+          <NavigationProperty Name="Pharmacy" Relationship="Self.FK_PharmacyDrugs" FromRole="Drugs" ToRole="Pharmacy" />
+          <NavigationProperty Name="PrescribeDrugs" Relationship="Self.ID_Drug" FromRole="Drugs" ToRole="PrescribeDrug" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Region" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Age" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Salary" Type="Int32" Nullable="false" />
+          <Property Name="ShiftTimeFrom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShiftTimeTo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pharmacy_ID" Type="Int32" />
+          <NavigationProperty Name="EmployeePhoneNumbers" Relationship="Self.Emp_IDPhone" FromRole="Employee" ToRole="EmployeePhoneNumber" />
+          <NavigationProperty Name="Pharmacy" Relationship="Self.PharmacyID" FromRole="Employee" ToRole="Pharmacy" />
+        </EntityType>
+        <EntityType Name="EmployeePhoneNumber">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="PhoneNumber1" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber2" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="Self.Emp_IDPhone" FromRole="EmployeePhoneNumber" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PatientPhoneNumbers" Relationship="Self.Patient_IDPhone" FromRole="Patient" ToRole="PatientPhoneNumber" />
+          <NavigationProperty Name="Prescribes" Relationship="Self.PHID" FromRole="Patient" ToRole="Prescribe" />
+        </EntityType>
+        <EntityType Name="PatientPhoneNumber">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="PhoneNumber1" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber2" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Patient" Relationship="Self.Patient_IDPhone" FromRole="PatientPhoneNumber" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Pharmacy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Region" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmpNo" Type="Int32" />
+          <Property Name="ManagerID" Type="Int32" />
+          <Property Name="DoctorID" Type="Int32" />
+          <NavigationProperty Name="Doctor" Relationship="Self.Doctor_ID" FromRole="Pharmacy" ToRole="Doctor" />
+          <NavigationProperty Name="Doctor1" Relationship="Self.Manager_ID" FromRole="Pharmacy" ToRole="Doctor" />
+          <NavigationProperty Name="DrugManufactruers" Relationship="Self.FK" FromRole="Pharmacy" ToRole="DrugManufactruer" />
+          <NavigationProperty Name="Drugs" Relationship="Self.FK_PharmacyDrugs" FromRole="Pharmacy" ToRole="Drugs" />
+          <NavigationProperty Name="Employees" Relationship="Self.PharmacyID" FromRole="Pharmacy" ToRole="Employee" />
+          <NavigationProperty Name="PharmacyPhoneNumbers" Relationship="Self.Pharmacy_IDPhone" FromRole="Pharmacy" ToRole="PharmacyPhoneNumber" />
+        </EntityType>
+        <EntityType Name="PharmacyPhoneNumber">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PharmacyID" Type="Int32" />
+          <Property Name="PhoneNumber1" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber2" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pharmacy" Relationship="Self.Pharmacy_IDPhone" FromRole="PharmacyPhoneNumber" ToRole="Pharmacy" />
+        </EntityType>
+        <EntityType Name="Prescribe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorID" Type="Int32" Nullable="false" />
+          <Property Name="PatientID" Type="Int32" Nullable="false" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Doctor" Relationship="Self.Doc_ID" FromRole="Prescribe" ToRole="Doctor" />
+          <NavigationProperty Name="Patient" Relationship="Self.PHID" FromRole="Prescribe" ToRole="Patient" />
+          <NavigationProperty Name="PrescribeDrugs" Relationship="Self.Prescribe_Drug" FromRole="Prescribe" ToRole="PrescribeDrug" />
+        </EntityType>
+        <EntityType Name="PrescribeDrug">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="DrugID" Type="Int32" />
+          <Property Name="Prescribe_ID" Type="Int32" />
+          <NavigationProperty Name="Drug" Relationship="Self.ID_Drug" FromRole="PrescribeDrug" ToRole="Drugs" />
+          <NavigationProperty Name="Prescribe" Relationship="Self.Prescribe_Drug" FromRole="PrescribeDrug" ToRole="Prescribe" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="Doc_ID">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Prescribe" Type="Self.Prescribe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Prescribe">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Doctor_ID">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pharmacy">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Doctor_IDPhone">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="DoctorPhoneNumber" Type="Self.DoctorPhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DoctorPhoneNumber">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Manager_ID">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pharmacy">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DrugManufactruer_IDPhone">
+          <End Role="DrugManufactruer" Type="Self.DrugManufactruer" Multiplicity="0..1" />
+          <End Role="DrugManufactruerPhoneNumber" Type="Self.DrugManufactruerPhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DrugManufactruer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrugManufactruerPhoneNumber">
+              <PropertyRef Name="DrugManufactruerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="0..1" />
+          <End Role="DrugManufactruer" Type="Self.DrugManufactruer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrugManufactruer">
+              <PropertyRef Name="PharmacyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactruerDrugs">
+          <End Role="DrugManufactruer" Type="Self.DrugManufactruer" Multiplicity="0..1" />
+          <End Role="Drugs" Type="Self.Drug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DrugManufactruer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="ManufactruerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PharmacyDrugs">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="0..1" />
+          <End Role="Drugs" Type="Self.Drug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="Pharmcy2ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_Drug">
+          <End Role="Drugs" Type="Self.Drug" Multiplicity="0..1" />
+          <End Role="PrescribeDrug" Type="Self.PrescribeDrug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drugs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PrescribeDrug">
+              <PropertyRef Name="DrugID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Emp_IDPhone">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="EmployeePhoneNumber" Type="Self.EmployeePhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmployeePhoneNumber">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PharmacyID">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Pharmacy_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Patient_IDPhone">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+          <End Role="PatientPhoneNumber" Type="Self.PatientPhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PatientPhoneNumber">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PHID">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Prescribe" Type="Self.Prescribe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Prescribe">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Pharmacy_IDPhone">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="0..1" />
+          <End Role="PharmacyPhoneNumber" Type="Self.PharmacyPhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PharmacyPhoneNumber">
+              <PropertyRef Name="PharmacyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Prescribe_Drug">
+          <End Role="Prescribe" Type="Self.Prescribe" Multiplicity="0..1" />
+          <End Role="PrescribeDrug" Type="Self.PrescribeDrug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prescribe">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PrescribeDrug">
+              <PropertyRef Name="Prescribe_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PharmacyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bills" EntityType="Self.Bill" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctor" />
+          <EntitySet Name="DoctorPhoneNumbers" EntityType="Self.DoctorPhoneNumber" />
+          <EntitySet Name="DrugManufactruers" EntityType="Self.DrugManufactruer" />
+          <EntitySet Name="DrugManufactruerPhoneNumbers" EntityType="Self.DrugManufactruerPhoneNumber" />
+          <EntitySet Name="Drugs" EntityType="Self.Drug" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="EmployeePhoneNumbers" EntityType="Self.EmployeePhoneNumber" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="PatientPhoneNumbers" EntityType="Self.PatientPhoneNumber" />
+          <EntitySet Name="Pharmacies" EntityType="Self.Pharmacy" />
+          <EntitySet Name="PharmacyPhoneNumbers" EntityType="Self.PharmacyPhoneNumber" />
+          <EntitySet Name="Prescribes" EntityType="Self.Prescribe" />
+          <EntitySet Name="PrescribeDrugs" EntityType="Self.PrescribeDrug" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="Doc_ID" Association="Self.Doc_ID">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Prescribe" EntitySet="Prescribes" />
+          </AssociationSet>
+          <AssociationSet Name="Doctor_ID" Association="Self.Doctor_ID">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Pharmacy" EntitySet="Pharmacies" />
+          </AssociationSet>
+          <AssociationSet Name="Doctor_IDPhone" Association="Self.Doctor_IDPhone">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="DoctorPhoneNumber" EntitySet="DoctorPhoneNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="Manager_ID" Association="Self.Manager_ID">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Pharmacy" EntitySet="Pharmacies" />
+          </AssociationSet>
+          <AssociationSet Name="DrugManufactruer_IDPhone" Association="Self.DrugManufactruer_IDPhone">
+            <End Role="DrugManufactruer" EntitySet="DrugManufactruers" />
+            <End Role="DrugManufactruerPhoneNumber" EntitySet="DrugManufactruerPhoneNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="FK" Association="Self.FK">
+            <End Role="Pharmacy" EntitySet="Pharmacies" />
+            <End Role="DrugManufactruer" EntitySet="DrugManufactruers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactruerDrugs" Association="Self.FK_ManufactruerDrugs">
+            <End Role="DrugManufactruer" EntitySet="DrugManufactruers" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PharmacyDrugs" Association="Self.FK_PharmacyDrugs">
+            <End Role="Pharmacy" EntitySet="Pharmacies" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="ID_Drug" Association="Self.ID_Drug">
+            <End Role="Drugs" EntitySet="Drugs" />
+            <End Role="PrescribeDrug" EntitySet="PrescribeDrugs" />
+          </AssociationSet>
+          <AssociationSet Name="Emp_IDPhone" Association="Self.Emp_IDPhone">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmployeePhoneNumber" EntitySet="EmployeePhoneNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="PharmacyID" Association="Self.PharmacyID">
+            <End Role="Pharmacy" EntitySet="Pharmacies" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="Patient_IDPhone" Association="Self.Patient_IDPhone">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="PatientPhoneNumber" EntitySet="PatientPhoneNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="PHID" Association="Self.PHID">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Prescribe" EntitySet="Prescribes" />
+          </AssociationSet>
+          <AssociationSet Name="Pharmacy_IDPhone" Association="Self.Pharmacy_IDPhone">
+            <End Role="Pharmacy" EntitySet="Pharmacies" />
+            <End Role="PharmacyPhoneNumber" EntitySet="PharmacyPhoneNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="Prescribe_Drug" Association="Self.Prescribe_Drug">
+            <End Role="Prescribe" EntitySet="Prescribes" />
+            <End Role="PrescribeDrug" EntitySet="PrescribeDrugs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PharmacyModelStoreContainer" CdmEntityContainer="PharmacyEntities">
+          <EntitySetMapping Name="Bills">
+            <EntityTypeMapping TypeName="PharmacyModel.Bill">
+              <MappingFragment StoreEntitySet="Bill">
+                <ScalarProperty Name="BillID" ColumnName="BillID" />
+                <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+                <ScalarProperty Name="NumberOfUnits" ColumnName="NumberOfUnits" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="PharmacistName" ColumnName="PharmacistName" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="SellingDate" ColumnName="SellingDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="PharmacyModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Responsibility" ColumnName="Responsibility" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorPhoneNumbers">
+            <EntityTypeMapping TypeName="PharmacyModel.DoctorPhoneNumber">
+              <MappingFragment StoreEntitySet="DoctorPhoneNumber">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
+                <ScalarProperty Name="PhoneNumber2" ColumnName="PhoneNumber2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DrugManufactruers">
+            <EntityTypeMapping TypeName="PharmacyModel.DrugManufactruer">
+              <MappingFragment StoreEntitySet="DrugManufactruer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PharmacyID" ColumnName="PharmacyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DrugManufactruerPhoneNumbers">
+            <EntityTypeMapping TypeName="PharmacyModel.DrugManufactruerPhoneNumber">
+              <MappingFragment StoreEntitySet="DrugManufactruerPhoneNumber">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DrugManufactruerID" ColumnName="DrugManufactruerID" />
+                <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
+                <ScalarProperty Name="PhoneNumber2" ColumnName="PhoneNumber2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drugs">
+            <EntityTypeMapping TypeName="PharmacyModel.Drug">
+              <MappingFragment StoreEntitySet="Drugs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ISSN" ColumnName="ISSN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="ProductionDate" ColumnName="ProductionDate" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="sellingPrice" ColumnName="sellingPrice" />
+                <ScalarProperty Name="BuyingPrice" ColumnName="BuyingPrice" />
+                <ScalarProperty Name="Pharmcy2ID" ColumnName="Pharmcy2ID" />
+                <ScalarProperty Name="ManufactruerID" ColumnName="ManufactruerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="PharmacyModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="ShiftTimeFrom" ColumnName="ShiftTimeFrom" />
+                <ScalarProperty Name="ShiftTimeTo" ColumnName="ShiftTimeTo" />
+                <ScalarProperty Name="Pharmacy_ID" ColumnName="Pharmacy_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeePhoneNumbers">
+            <EntityTypeMapping TypeName="PharmacyModel.EmployeePhoneNumber">
+              <MappingFragment StoreEntitySet="EmployeePhoneNumber">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
+                <ScalarProperty Name="PhoneNumber2" ColumnName="PhoneNumber2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="PharmacyModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientPhoneNumbers">
+            <EntityTypeMapping TypeName="PharmacyModel.PatientPhoneNumber">
+              <MappingFragment StoreEntitySet="PatientPhoneNumber">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
+                <ScalarProperty Name="PhoneNumber2" ColumnName="PhoneNumber2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pharmacies">
+            <EntityTypeMapping TypeName="PharmacyModel.Pharmacy">
+              <MappingFragment StoreEntitySet="Pharmacy">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PharmacyPhoneNumbers">
+            <EntityTypeMapping TypeName="PharmacyModel.PharmacyPhoneNumber">
+              <MappingFragment StoreEntitySet="PharmacyPhoneNumber">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PharmacyID" ColumnName="PharmacyID" />
+                <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
+                <ScalarProperty Name="PhoneNumber2" ColumnName="PhoneNumber2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prescribes">
+            <EntityTypeMapping TypeName="PharmacyModel.Prescribe">
+              <MappingFragment StoreEntitySet="Prescribe">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrescribeDrugs">
+            <EntityTypeMapping TypeName="PharmacyModel.PrescribeDrug">
+              <MappingFragment StoreEntitySet="PrescribeDrug">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="DrugID" ColumnName="DrugID" />
+                <ScalarProperty Name="Prescribe_ID" ColumnName="Prescribe_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PharmacyModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
